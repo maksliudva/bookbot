@@ -23,9 +23,6 @@ def get_chars_dict(text):
             chars[lowered] = 1
     return chars
 
-def sort_on(dict):
-    return dict["num"]
-
 
 def create_list_from_dict(dict):
     """
@@ -39,13 +36,6 @@ def create_list_from_dict(dict):
         dictionary_list.append(temp_dict)  
         
     return dictionary_list
-
-
-def get_dict_by_key(list_of_dict, key="num"):
-    for dict in list_of_dict:
-        if dict[key]:
-            return dict
-    return None
 
 
 def sort_list(list,key="num"):
@@ -67,6 +57,9 @@ def count_words(file_string):
 
 
 def print_report(text,characters_list,path):
+    """
+    Prints a neat report about the count of every letter in alphabet
+    """
     print(f"--- Begin report of {path} ---")
     print(f"{count_words(text)} words found in the document")
     for dict in characters_list:
@@ -75,19 +68,23 @@ def print_report(text,characters_list,path):
                 print(f"The '{k}' character was found {v} times")
             
 
-
 def __main__():
     filepath = "books/frankenstein.txt"
     book_text = get_book_text(filepath)
     word_count = count_words(book_text)
-    #print(f"{word_count} words found in the document.")
-    #count_characters(book_text)
-    #print(get_chars_dict(book_text))
+
+    # Create dictionary of type : "a": 3453
     characters_dict = get_chars_dict(book_text)
+
+    # Create a list of dictionaries, having only one letter within it
     characters_list = create_list_from_dict(characters_dict)
+
+    # Sort the list decending
     sort_list(characters_list)
+
+    # Printing a report
     print_report(book_text,characters_list, filepath)  
-    #print(characters_list[0].[0])
+   
 
 if __name__ == '__main__':
     __main__()
